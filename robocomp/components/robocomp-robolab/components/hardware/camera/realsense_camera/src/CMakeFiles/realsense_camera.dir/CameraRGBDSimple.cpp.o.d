@@ -1,7 +1,7 @@
 src/CMakeFiles/realsense_camera.dir/CameraRGBDSimple.cpp.o: \
- /home/robolab/proyectoTFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/CameraRGBDSimple.cpp \
+ /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/CameraRGBDSimple.cpp \
  /usr/include/stdc-predef.h \
- /home/robolab/proyectoTFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/CameraRGBDSimple.h \
+ /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/CameraRGBDSimple.h \
  /usr/include/IceUtil/PushDisableWarnings.h /usr/include/Ice/ProxyF.h \
  /usr/include/Ice/Config.h /usr/include/IceUtil/Config.h \
  /usr/include/c++/11/stdlib.h /usr/include/c++/11/cstdlib \

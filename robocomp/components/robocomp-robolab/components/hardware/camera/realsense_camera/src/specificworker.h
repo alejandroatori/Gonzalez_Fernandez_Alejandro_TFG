@@ -33,6 +33,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/opencv.hpp>
 #include <fps/fps.h>
+//#include <open3d/Open3D.h>
 
 using namespace std::chrono;
 
@@ -60,8 +61,8 @@ private:
 	// camera
     // Declare RealSense pipeline, encapsulating the actual device and sensors
     std::string serial_number = "";
-    bool display_rgb = false;
-    bool display_depth = false;
+    bool display_rgb = true;
+    bool display_depth = true;
     bool display_compressed = false;
     bool align_frames = false;
     int img_width = 640;      // img size
@@ -132,6 +133,10 @@ private:
     float get_depth_scale(rs2::device dev);
     mutable std::mutex swap_mutex;
     RoboCompCameraRGBDSimple::TRGBD rgbd;
+
+    //New Methods
+    void videoCaptureAndWriteDisk ();
+
 
     // fps
     FPSCounter fps;

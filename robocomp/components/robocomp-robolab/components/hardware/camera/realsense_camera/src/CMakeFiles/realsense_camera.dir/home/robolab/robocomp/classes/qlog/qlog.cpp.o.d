@@ -1,7 +1,7 @@
 src/CMakeFiles/realsense_camera.dir/home/robolab/robocomp/classes/qlog/qlog.cpp.o: \
  /home/robolab/robocomp/classes/qlog/qlog.cpp /usr/include/stdc-predef.h \
  /home/robolab/robocomp/classes/qlog/qlog.h \
- /home/robolab/proyectoTFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/config.h \
+ /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/config.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QtCore \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QtCoreDepends \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qglobal.h \

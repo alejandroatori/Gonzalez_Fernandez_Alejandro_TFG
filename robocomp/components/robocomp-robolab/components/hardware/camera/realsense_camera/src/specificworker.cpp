@@ -184,6 +184,23 @@ void SpecificWorker::compute()
     ready_to_go = true;
 }
 
+// New Methods
+
+/*
+ * Este metodo va a capturar la imagen que se esta recibiendo y se va a escribir en disco
+ * http://www.open3d.org/docs/release/tutorial/sensor/realsense.html
+ */
+
+void SpecificWorker::videoCaptureAndWriteDisk ()
+{
+    auto archivo = "/home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/camera_conf.json";
+    //open3d::t::io::RealSenseSensorConfig realSensorConfiguration;
+    //open3d::io::ReadIJsonConvertible(archivo, realSensorConfiguration);                              //Ruta archivo configuracion
+
+
+}
+
+
 float SpecificWorker::get_depth_scale(rs2::device dev)
 {
     // Go over the device's sensors

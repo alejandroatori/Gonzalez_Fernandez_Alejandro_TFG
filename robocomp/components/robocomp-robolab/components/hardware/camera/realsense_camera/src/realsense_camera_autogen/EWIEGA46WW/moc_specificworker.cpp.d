@@ -1,10 +1,10 @@
-/home/robolab/proyectoTFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/realsense_camera_autogen/EWIEGA46WW/moc_specificworker.cpp: /home/robolab/proyectoTFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/specificworker.h \
-  /home/robolab/proyectoTFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/realsense_camera_autogen/moc_predefs.h \
-  /home/robolab/proyectoTFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/CameraRGBDSimple.h \
-  /home/robolab/proyectoTFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/CameraRGBDSimplePub.h \
-  /home/robolab/proyectoTFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/CommonBehavior.h \
-  /home/robolab/proyectoTFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/config.h \
-  /home/robolab/proyectoTFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/genericworker.h \
+/home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/realsense_camera_autogen/EWIEGA46WW/moc_specificworker.cpp: /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/specificworker.h \
+  /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/realsense_camera_autogen/moc_predefs.h \
+  /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/CameraRGBDSimple.h \
+  /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/CameraRGBDSimplePub.h \
+  /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/CommonBehavior.h \
+  /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/config.h \
+  /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/genericworker.h \
   /opt/robocomp/classes/fps/fps.h \
   /opt/robocomp/classes/qlog/qlog.h \
   /usr/include/Ice/AsyncResult.h \

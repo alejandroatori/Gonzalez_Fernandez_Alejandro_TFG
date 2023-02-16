@@ -1,5 +1,5 @@
-/home/robolab/proyectoTFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/realsense_camera_autogen/include/moc_sigwatch.cpp: /opt/robocomp/classes/sigwatch/sigwatch.h \
-  /home/robolab/proyectoTFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/realsense_camera_autogen/moc_predefs.h \
+/home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/realsense_camera_autogen/include/moc_sigwatch.cpp: /opt/robocomp/classes/sigwatch/sigwatch.h \
+  /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/realsense_camera_autogen/moc_predefs.h \
   /usr/include/assert.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/array \
