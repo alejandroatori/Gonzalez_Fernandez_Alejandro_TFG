@@ -1,0 +1,23 @@
+CommonBehavior.Endpoints=tcp -p 10420
+
+# Proxies for required interfaces
+CameraRGBDSimpleProxy = camerargbdsimple:tcp -h localhost -p 10095
+LaserProxy = laser:tcp -h localhost -p 10003
+AprilTagsProxy = apriltags:tcp -h localhost -p 12555
+#YoloObjectsProxy = yoloobjects:tcp -h jetson-nx-0.local -p 10054
+YoloObjectsProxy = yoloobjects:tcp  -p 10054
+
+#################################################
+# GRID dimensions
+#################################################
+left_x = -5000
+top_y = -2500   # Y axis is inverted in code
+width = 10000
+height = 5000
+tile = 50
+
+
+Ice.Warn.Connections=0
+Ice.Trace.Network=0
+Ice.Trace.Protocol=0
+Ice.MessageSizeMax=20004800

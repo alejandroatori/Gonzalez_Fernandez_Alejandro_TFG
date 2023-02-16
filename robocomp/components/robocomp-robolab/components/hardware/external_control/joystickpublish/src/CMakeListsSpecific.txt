@@ -1,0 +1,20 @@
+find_package(qmat)
+
+# Sources set
+SET ( SOURCES
+  specificworker.cpp
+  specificmonitor.cpp
+    $ENV{ROBOCOMP}/classes/qjoystick/qjoystick.cpp
+)
+
+# Headers set
+SET ( HEADERS
+  specificworker.h
+  specificmonitor.h
+    $ENV{ROBOCOMP}/classes/qjoystick/qjoystick.h
+)
+
+
+set(CMAKE_CXX_STANDARD 17)
+ADD_DEFINITIONS(-O3)
+

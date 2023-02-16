@@ -1,0 +1,17 @@
+# Proxies for required interfaces
+#CameraRGBDSimpleProxy = camerargbdsimple:tcp -h jetson-nx-0.local -p 10096
+#HumanCameraBodyProxy = humancamerabody:tcp -h jetson-nx-0.local -p 14213
+#YoloObjectsProxy = yoloobjects:tcp -h jetson-nx-0.local -p 10054
+
+
+CameraRGBDSimpleProxy = camerargbdsimple:tcp -h jetson-orin-0.local -p 10096
+HumanCameraBodyProxy = humancamerabody:tcp -h jetson-orin-0.local -p 14213
+YoloObjectsProxy = yoloobjects:tcp -h jetson-orin-0.local -p 10054
+
+Ice.Warn.Connections=0
+Ice.Trace.Network=0
+Ice.Trace.Protocol=0
+Ice.MessageSizeMax=20004800
+
+
+

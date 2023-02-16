@@ -1,0 +1,24 @@
+# Endpoints for implements interfaces
+CameraRGBDSimple.Endpoints=tcp -p 10098
+HumanCameraBody.Endpoints=tcp -p 14213
+
+YoloObjectsProxy = yoloobjects:tcp -p 10054
+CameraRGBDSimpleProxy = camerargbdsimple:tcp   -p 10095
+
+display = true
+human_parts_file = human_pose.json
+camera_name = camera_top
+with_objects = false
+min_number_of_joints = 3
+
+# This property is used by the clients to connect to IceStorm.
+TopicManager.Proxy=IceStorm/TopicManager:default -p 9999
+
+
+Ice.Warn.Connections=0
+Ice.Trace.Network=0
+Ice.Trace.Protocol=0
+Ice.MessageSizeMax=20004800
+
+
+

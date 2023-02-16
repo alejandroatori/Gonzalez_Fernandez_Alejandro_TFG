@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "../bin/camera_rgbdsimple_viewer"
+  "../bin/camera_rgbdsimple_viewer.pdb"
+  "CMakeFiles/camera_rgbdsimple_viewer_autogen.dir/AutogenUsed.txt"
+  "CMakeFiles/camera_rgbdsimple_viewer_autogen.dir/ParseCache.txt"
+  "camera_rgbdsimple_viewer_autogen"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/CameraRGBDSimple.cpp.o"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/CameraRGBDSimple.cpp.o.d"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/CommonBehavior.cpp.o"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/CommonBehavior.cpp.o.d"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/camera_rgbdsimple_viewer_autogen/mocs_compilation.cpp.o"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/camera_rgbdsimple_viewer_autogen/mocs_compilation.cpp.o.d"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/commonbehaviorI.cpp.o"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/commonbehaviorI.cpp.o.d"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/genericmonitor.cpp.o"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/genericmonitor.cpp.o.d"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/genericworker.cpp.o"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/genericworker.cpp.o.d"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/home/robolab/robocomp/classes/qlog/qlog.cpp.o"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/home/robolab/robocomp/classes/qlog/qlog.cpp.o.d"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/home/robolab/robocomp/classes/rapplication/rapplication.cpp.o"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/home/robolab/robocomp/classes/rapplication/rapplication.cpp.o.d"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/home/robolab/robocomp/classes/sigwatch/sigwatch.cpp.o"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/home/robolab/robocomp/classes/sigwatch/sigwatch.cpp.o.d"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/main.cpp.o"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/main.cpp.o.d"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/specificmonitor.cpp.o"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/specificmonitor.cpp.o.d"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/specificworker.cpp.o"
+  "CMakeFiles/camera_rgbdsimple_viewer.dir/specificworker.cpp.o.d"
+  "CameraRGBDSimple.cpp"
+  "CameraRGBDSimple.h"
+  "CommonBehavior.cpp"
+  "CommonBehavior.h"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/camera_rgbdsimple_viewer.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
