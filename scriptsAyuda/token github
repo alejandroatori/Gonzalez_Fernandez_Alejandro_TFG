@@ -1,0 +1,9 @@
+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
+
+realsense-viewer (Activa la muestra de la camara es comando de terminal hay script)
+
+nos importa el serial number de la camara
+
+/proyectoTFG/robocomp/components/robocomp-robolab/components/viewers/camera_rgbdsimple_viewer2/etc
+
+/proyectoTFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera
