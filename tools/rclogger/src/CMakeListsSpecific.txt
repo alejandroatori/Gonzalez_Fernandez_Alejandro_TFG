@@ -1,0 +1,9 @@
+
+# Sources set
+SET ( SPECIFIC_SOURCES
+  specificworker.cpp
+  specificmonitor.cpp
+  exportCSVWidget.cpp
+)
+
+install(DIRECTORY "../icons" DESTINATION /opt/robocomp/share/rclogger )

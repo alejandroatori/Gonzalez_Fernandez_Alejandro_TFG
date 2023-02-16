@@ -1,0 +1,8 @@
+/interfaces/JointMotor.ice
+jointmotor
+localhost
+tcp
+10068
+30
+jointMotor.py
+

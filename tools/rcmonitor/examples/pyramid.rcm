@@ -1,0 +1,7 @@
+/interfaces/Vision.ice
+vision
+localhost
+tcp
+10000
+500
+pyramid.py

@@ -1,0 +1,15 @@
+{
+    "imports": [
+        "HumanPose.idsl"
+        ],
+    "name": "humanAgent",
+    "subscribesTo": [
+        "HumanPose"
+        ],
+    "language": {
+        "name": "Cpp"
+    },
+    "options": [
+        "agmagent"
+        ]
+}

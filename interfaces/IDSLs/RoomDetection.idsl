@@ -1,0 +1,19 @@
+
+module RoboCompRoomDetection
+{
+
+  struct Corner
+  {
+    float x;
+    float y;
+  };
+
+  sequence<Corner> ListOfPoints;
+  sequence<ListOfPoints> Rooms;
+	
+	interface RoomDetection
+  {
+    Rooms detectRoom(ListOfPoints l);
+  };
+};
+

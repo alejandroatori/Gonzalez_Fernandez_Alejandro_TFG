@@ -1,0 +1,8 @@
+/interfaces/RobotTrajectory.ice
+robottrajectory
+localhost
+tcp
+10069
+30
+robottrajectory.py
+

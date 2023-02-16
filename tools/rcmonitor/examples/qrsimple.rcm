@@ -1,0 +1,8 @@
+/interfaces/Qrdecode.ice
+qrdecode
+localhost
+tcp
+10112
+30
+qrsimple.py
+

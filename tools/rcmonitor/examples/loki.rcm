@@ -1,0 +1,8 @@
+/interfaces/JointMotor.ice
+jointmotor
+localhost
+tcp
+20000
+30
+loki.py
+

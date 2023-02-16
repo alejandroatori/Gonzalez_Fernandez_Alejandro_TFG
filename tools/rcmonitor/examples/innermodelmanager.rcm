@@ -1,0 +1,7 @@
+/interfaces/InnerModelManager.ice
+innermodelmanager
+localhost
+tcp
+11175
+100
+innermodelmanager.py

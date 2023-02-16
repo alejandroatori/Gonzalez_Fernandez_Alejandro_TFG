@@ -1,0 +1,20 @@
+module RoboCompCameraSimple
+{
+  exception HardwareFailedException { string what; };
+
+  sequence<byte> ImgType;
+
+  struct TImage
+  {
+    bool compressed;  // opencv jpeg compression
+    int width;
+    int height;
+    int depth;
+    ImgType image;
+  };
+
+  interface CameraSimple
+  {
+    TImage getImage() throws HardwareFailedException;
+  };
+};
