@@ -1,0 +1,3 @@
+[submodule "robocomp"]
+	path = robocomp
+	url = https://github.com/robocomp/robocomp.git
