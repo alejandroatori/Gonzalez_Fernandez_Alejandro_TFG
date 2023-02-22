@@ -33,7 +33,12 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/opencv.hpp>
 #include <fps/fps.h>
+#include <Python3.h>
+
+//Librerias añadidas
 //#include <open3d/Open3D.h>
+//import open3d;
+
 
 using namespace std::chrono;
 
