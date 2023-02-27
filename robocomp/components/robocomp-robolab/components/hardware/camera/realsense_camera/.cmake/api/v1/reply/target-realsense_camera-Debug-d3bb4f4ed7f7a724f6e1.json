@@ -129,7 +129,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-fdiagnostics-color=always   -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED -Wall -DQT_DLL -DQT_GUI_LIB -DQT_CORE_LIB -O3 -march=native -fmax-errors=5 -g -fmax-errors=1 -fno-char8_t"
+					"fragment" : "-g -fdiagnostics-color=always   -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED -Wall -DQT_DLL -DQT_GUI_LIB -DQT_CORE_LIB -O3 -march=native -fmax-errors=5 -g -fmax-errors=1 -fno-char8_t"
 				},
 				{
 					"backtrace" : 2,
@@ -156,10 +156,6 @@
 				{
 					"backtrace" : 2,
 					"define" : "QT_NETWORK_LIB"
-				},
-				{
-					"backtrace" : 2,
-					"define" : "QT_NO_DEBUG"
 				},
 				{
 					"backtrace" : 2,
@@ -324,6 +320,10 @@
 	{
 		"commandFragments" : 
 		[
+			{
+				"fragment" : "-g",
+				"role" : "flags"
+			},
 			{
 				"fragment" : "",
 				"role" : "flags"

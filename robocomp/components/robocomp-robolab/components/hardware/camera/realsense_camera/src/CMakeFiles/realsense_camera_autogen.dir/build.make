@@ -68,7 +68,7 @@ include src/CMakeFiles/realsense_camera_autogen.dir/progress.make
 
 src/CMakeFiles/realsense_camera_autogen:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target realsense_camera"
-	cd /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src && /snap/clion/222/bin/cmake/linux/x64/bin/cmake -E cmake_autogen /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/CMakeFiles/realsense_camera_autogen.dir/AutogenInfo.json ""
+	cd /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src && /snap/clion/222/bin/cmake/linux/x64/bin/cmake -E cmake_autogen /home/robolab/Gonzalez_Fernandez_Alejandro_TFG/robocomp/components/robocomp-robolab/components/hardware/camera/realsense_camera/src/CMakeFiles/realsense_camera_autogen.dir/AutogenInfo.json Debug
 
 realsense_camera_autogen: src/CMakeFiles/realsense_camera_autogen
 realsense_camera_autogen: src/CMakeFiles/realsense_camera_autogen.dir/build.make

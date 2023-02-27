@@ -11,7 +11,7 @@
 						1
 					],
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-eb84d120220d299db1b6.json",
+					"jsonFile" : "directory-.-Debug-eb84d120220d299db1b6.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "2.8"
@@ -22,7 +22,7 @@
 				{
 					"build" : "src",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-src-9011a96c0adf04b0bde1.json",
+					"jsonFile" : "directory-src-Debug-9011a96c0adf04b0bde1.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.10"
@@ -38,7 +38,7 @@
 					]
 				}
 			],
-			"name" : "",
+			"name" : "Debug",
 			"projects" : 
 			[
 				{
@@ -61,21 +61,21 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "ICES__home_robolab_Gonzalez_Fernandez_Alejandro_TFG_robocomp_components_robocomp-robolab_components_hardware_camera_realsense_camera_src::@145eef247bfb46b6828c",
-					"jsonFile" : "target-ICES__home_robolab_Gonzalez_Fernandez_Alejandro_TFG_robocomp_components_robocomp-robolab_components_hardware_camera_realsense_camera_src-4331f92f83c4158c0ea5.json",
+					"jsonFile" : "target-ICES__home_robolab_Gonzalez_Fernandez_Alejandro_TFG_robocomp_components_robocomp-robolab_components_hardware_camera_realsense_camera_src-Debug-4331f92f83c4158c0ea5.json",
 					"name" : "ICES__home_robolab_Gonzalez_Fernandez_Alejandro_TFG_robocomp_components_robocomp-robolab_components_hardware_camera_realsense_camera_src",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 1,
 					"id" : "realsense_camera::@145eef247bfb46b6828c",
-					"jsonFile" : "target-realsense_camera-5f0bd6d29384926793d2.json",
+					"jsonFile" : "target-realsense_camera-Debug-d3bb4f4ed7f7a724f6e1.json",
 					"name" : "realsense_camera",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 1,
 					"id" : "realsense_camera_autogen::@145eef247bfb46b6828c",
-					"jsonFile" : "target-realsense_camera_autogen-627460a1a95402abeb94.json",
+					"jsonFile" : "target-realsense_camera_autogen-Debug-627460a1a95402abeb94.json",
 					"name" : "realsense_camera_autogen",
 					"projectIndex" : 0
 				}
