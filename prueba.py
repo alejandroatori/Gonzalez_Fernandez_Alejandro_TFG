@@ -10,12 +10,6 @@ recordFrameModeActive = True
 maxSecondsVideo = 5
 maxFramesVideo = 150
 
-
-
-
-
-
-
 if recordTimeModeActive & recordFrameModeActive == False:
 
 	# Configure depth and color streams
@@ -60,10 +54,7 @@ if recordTimeModeActive & recordFrameModeActive == False:
 		print ("Mode Selected -> Time Mode")
 		startTime = time.time()
 	else:
-		print ("Mode Selected -> Only View")
-	
-	
-	
+		print ("Mode Selected -> Only View")	
 	
 	# Start streaming and getting frames
 	pipeline.start(config)
@@ -97,47 +88,30 @@ if recordTimeModeActive & recordFrameModeActive == False:
 		        images = np.hstack((resized_color_image, depth_colormap))
 		    else:
 		        images = np.hstack((color_image, depth_colormap))
-		        
-		    if maxFramesVideo > countFrames:
-		        # Increment the count of frames that are taken
-		        countFrames += 1
-		        continue
-		        
-		    # If we got max value of frames we have to stop recording
-		    else:
-		        print ("Record Finish")
-		        break    
 		    
-		    """
-		    # Make the work for each mode (Frame, time, only view)
-		   	
 		    if recordFrameModeActive:
-				# Check if the video is recorded (It get all frames required. The limit is defined at the start)
-		    	if maxFramesVideo > countFrames:
-		        	# Increment the count of frames that are taken
-		        	countFrames += 1
-		        	continue
-		        
-		    	# If we got max value of frames we have to stop recording
-		    	else:
-		        	print ("Record Finish")
-		        	break
-		        	
-		        	
-			if recordTimeModeActive:
-				if maxSecondsVideo < (startTime - time.time()):
-					print ("Record Finish")
-		        	break
+                if maxFramesVideo > countFrames:
+                    # Increment the count of frames that are taken
+                    countFrames += 1
+               		#If we are in this mode we are not interested about show what the cam is seing
+                    continue
+                else:                # If we got max value of frames we have to stop recording
+                    print ("Finished Recording. Recorded", maxFramesVideo, "frames")
+	               	break
+                    
+            if recordTimeModeActive:
+                currentTime = time.time()
+                if (currentTime - startTime) > maxSecondsVideo:
+                    print ("Finished Recording. Recorded", maxSecondsVideo, "seconds")
+                    break
+                else:
+                    #If we are in this mode we are not interested about show what the cam is seing
+                    continue
 
-		        	
-		    	# If we didn´t get x seconds we continue
-		    	else:
-		        	continue
-		  	
-		    cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
-			cv2.imshow('RealSense', images)
-			cv2.waitKey(1)
-			"""
+            # If we have both modes desactivated (False) then it will show what the camera is seing
+            cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
+            cv2.imshow('RealSense', images)
+            cv2.waitKey(1)
 	finally:
 
 		# Stop streaming

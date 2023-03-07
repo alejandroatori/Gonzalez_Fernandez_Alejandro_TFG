@@ -29,7 +29,6 @@ import pyrealsense2 as rs
 import numpy as np
 import cv2
 import time
-import lz4.frame as frm
 
 sys.path.append('/opt/robocomp/lib')
 console = Console(highlight=False)
@@ -54,13 +53,6 @@ device = pipeline_profile.get_device()                                          
 device_product_line = str(device.get_info(rs.camera_info.product_line))         # Convert information of camera in string
 
 
-
-
-
-
-
-
-
 # If RoboComp was compiled with Python bindings you can use InnerModel in Python
 # import librobocomp_qmat
 # import librobocomp_osgviewer
@@ -68,6 +60,8 @@ device_product_line = str(device.get_info(rs.camera_info.product_line))         
 
 
 class SpecificWorker(GenericWorker):
+    
+    
     def __init__(self, proxy_map, startup_check=False):
         super(SpecificWorker, self).__init__(proxy_map)
         self.Period = 2000
@@ -96,19 +90,11 @@ class SpecificWorker(GenericWorker):
         config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
 
         # Preparing record settings
-        config.enable_record_to_file('/home/robolab/carpetaVideos/videoCorto.bag')
-
-        if recordFrameModeActive:
-            print ("Mode Selected -> Frame Mode")
-            countFrames = 0
-        elif recordTimeModeActive:
-            print ("Mode Selected -> Time Mode")
-            startTime = time.time()
-        else:
-            print ("Mode Selected -> Only View")
+        #config.enable_record_to_file('/home/robolab/carpetaVideos/videoCorto.bag')
 
         # Start streaming and getting frames
         pipeline.start(config)
+
 
     def __del__(self):
         """Destructor"""
@@ -125,6 +111,15 @@ class SpecificWorker(GenericWorker):
     @QtCore.Slot()
     def compute(self):
         #print('SpecificWorker.compute...')
+        # Show the information about how the code will work
+        if recordFrameModeActive:
+            print ("Mode Selected -> Frame Mode")
+            countFrames = 0
+        elif recordTimeModeActive:
+            print ("Mode Selected -> Time Mode")
+            startTime = time.time()
+        else:
+            print ("Mode Selected -> Only View")
 
         # Execute a loop who get the image and show it
         try:
@@ -154,7 +149,32 @@ class SpecificWorker(GenericWorker):
                     images = np.hstack((resized_color_image, depth_colormap))
                 else:
                     images = np.hstack((color_image, depth_colormap))
+                    
                 """
+                if recordFrameModeActive:
+                    if maxFramesVideo > countFrames:
+                        # Increment the count of frames that are taken
+                        countFrames += 1
+                        #If we are in this mode we are not interested about show what the cam is seing
+                        continue
+                    else:                # If we got max value of frames we have to stop recording
+                        print ("Finished Recording. Recorded", maxFramesVideo, "frames")
+                        break
+                    
+                if recordTimeModeActive:
+                    currentTime = time.time()
+                    if (currentTime - startTime) > maxSecondsVideo:
+                        print ("Finished Recording. Recorded", maxSecondsVideo, "seconds")
+                        break
+                    else:
+                        #If we are in this mode we are not interested about show what the cam is seing
+                        continue
+
+                # If we have both modes desactivated (False) then it will show what the camera is seing
+                cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
+                cv2.imshow('RealSense', images)
+                cv2.waitKey(1)
+                
                 if maxFramesVideo > countFrames:
                     # Increment the count of frames that are taken
                     countFrames += 1
@@ -165,10 +185,12 @@ class SpecificWorker(GenericWorker):
                     print ("Record Finish")
                     break
                 """
-
+                
                 cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
                 cv2.imshow('RealSense', images)
                 cv2.waitKey(1)
+
+                
                 #print ("Image Showed")
         finally:
             # Stop streaming
