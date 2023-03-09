@@ -29,18 +29,21 @@ import pyrealsense2 as rs
 import numpy as np
 import cv2
 import time
+import sys
 
 sys.path.append('/opt/robocomp/lib')
 console = Console(highlight=False)
 
 # Configure how the component works
-recordTimeModeActive = False
-recordFrameModeActive = True
+recordTimeModeActive = True
+recordFrameModeActive = False
 
 maxSecondsVideo = 5
 maxFramesVideo = 150
 
-
+startTime = 0.0
+countFrames = 0
+endExecute = 0
 
 # Configure depth and color streams
 pipeline = rs.pipeline()
@@ -71,8 +74,9 @@ class SpecificWorker(GenericWorker):
             self.timer.timeout.connect(self.compute)
             self.timer.start(self.Period)
 
+
         # Check if camera works correctly (It´s RGBD == Correct)
-        found_rgb = False
+        found_rgb = False	
         for s in device.sensors:
             print ("Device Name:", s.get_info(rs.camera_info.name))
             if s.get_info(rs.camera_info.name) == 'RGB Camera':
@@ -83,17 +87,30 @@ class SpecificWorker(GenericWorker):
             print("The demo requires Depth camera with Color sensor")
 
             # Program finish because there aren´t cameras RGBD available
-            exit(0)
+            #exit(0)
 
         # Configure everything about streams (It shows camera information spliting colors and depth)
         config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
         config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
 
         # Preparing record settings
-        #config.enable_record_to_file('/home/robolab/carpetaVideos/videoCorto.bag')
+        if recordFrameModeActive or recordTimeModeActive:
+            print ("It´s gonna be recorded. Check the folder \"/home/robolab/carpetaVideos\"")
+            #config.enable_record_to_file('/home/robolab/carpetaVideos/videoCorto.bag')
 
         # Start streaming and getting frames
         pipeline.start(config)
+        
+        # Show the information about how the code will work
+        if recordFrameModeActive:
+            print ("Mode Selected -> Frame Mode")
+            countFrames = 0
+        elif recordTimeModeActive:
+            print ("Mode Selected -> Time Mode")
+            startTime = time.time()
+        else:
+            print ("Mode Selected -> Only View")
+           
 
 
     def __del__(self):
@@ -111,15 +128,7 @@ class SpecificWorker(GenericWorker):
     @QtCore.Slot()
     def compute(self):
         #print('SpecificWorker.compute...')
-        # Show the information about how the code will work
-        if recordFrameModeActive:
-            print ("Mode Selected -> Frame Mode")
-            countFrames = 0
-        elif recordTimeModeActive:
-            print ("Mode Selected -> Time Mode")
-            startTime = time.time()
-        else:
-            print ("Mode Selected -> Only View")
+        
 
         # Execute a loop who get the image and show it
         try:
@@ -150,7 +159,7 @@ class SpecificWorker(GenericWorker):
                 else:
                     images = np.hstack((color_image, depth_colormap))
                     
-                """
+                
                 if recordFrameModeActive:
                     if maxFramesVideo > countFrames:
                         # Increment the count of frames that are taken
@@ -175,6 +184,7 @@ class SpecificWorker(GenericWorker):
                 cv2.imshow('RealSense', images)
                 cv2.waitKey(1)
                 
+                """
                 if maxFramesVideo > countFrames:
                     # Increment the count of frames that are taken
                     countFrames += 1
@@ -184,33 +194,28 @@ class SpecificWorker(GenericWorker):
                 else:
                     print ("Record Finish")
                     break
-                """
+                
                 
                 cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
                 cv2.imshow('RealSense', images)
                 cv2.waitKey(1)
 
-                
+                """
                 #print ("Image Showed")
         finally:
             # Stop streaming
-            pipeline.stop()
-            print ("Pipeline stopped")
-
-        # computeCODE
-        # try:
-        #   self.differentialrobot_proxy.setSpeedBase(100, 0)
-        # except Ice.Exception as e:
-        #   traceback.print_exc()
-        #   print(e)
-
-        # The API of python-innermodel is not exactly the same as the C++ version
-        # self.innermodel.updateTransformValues('head_rot_tilt_pose', 0, 0, 0, 1.3, 0, 0)
-        # z = librobocomp_qmat.QVec(3,0)
-        # r = self.innermodel.transform('rgbd', z, 'laser')
-        # r.printvector('d')
-        # print(r[0], r[1], r[2])
-
+            """
+            if endExecute == 0:
+                pipeline.stop()
+                self.timer.stop()
+                print ("Pipeline stopped")
+                print ("Numero de seconds grabados ->", (currentTime - startTime))    
+                endExecute = 1        
+            #exit(0)
+            #sys.exit(0)
+	    """
+            
+             
         return True
 
     def startup_check(self):
