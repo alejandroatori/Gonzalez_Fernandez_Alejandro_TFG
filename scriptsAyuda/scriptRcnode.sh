@@ -1,7 +1,6 @@
-#Script para activar el rcnode & necesario para la camara
+# Generación de un servidor gracias a la librería icebox
 
-# Lo primero es acceder a la ruta donde se encuentra
+# Lo primero es alcanzar la carpeta donde se encuentra
 cd /home/robolab/robocomp/robocomp_tools/rcnode
 
-# Después ejecutar el script
 ./rcnode.sh &

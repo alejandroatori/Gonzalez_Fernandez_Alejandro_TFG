@@ -34,28 +34,6 @@ import sys
 sys.path.append('/opt/robocomp/lib')
 console = Console(highlight=False)
 
-# Configure how the component works
-recordTimeModeActive = True
-recordFrameModeActive = False
-
-maxSecondsVideo = 5
-maxFramesVideo = 150
-
-startTime = 0.0
-countFrames = 0
-endExecute = 0
-
-# Configure depth and color streams
-pipeline = rs.pipeline()
-config = rs.config()
-
-# Get device product line for setting a supporting resolution
-pipeline_wrapper = rs.pipeline_wrapper(pipeline)
-pipeline_profile = config.resolve(pipeline_wrapper)
-device = pipeline_profile.get_device()                                          # Get all the information about the cam
-device_product_line = str(device.get_info(rs.camera_info.product_line))         # Convert information of camera in string
-
-
 # If RoboComp was compiled with Python bindings you can use InnerModel in Python
 # import librobocomp_qmat
 # import librobocomp_osgviewer
@@ -63,7 +41,29 @@ device_product_line = str(device.get_info(rs.camera_info.product_line))         
 
 
 class SpecificWorker(GenericWorker):
+    # 
+    isStreaming = False
     
+    
+    # Configure how the component works
+    recordTimeModeActive = False
+    recordFrameModeActive = False
+
+    maxSecondsVideo = 5
+    maxFramesVideo = 150
+
+    startTime = 0.0
+    countFrames = 0
+    
+    # Configure depth and color streams
+    pipeline = rs.pipeline()
+    config = rs.config()
+
+    # Get device product line for setting a supporting resolution
+    pipeline_wrapper = rs.pipeline_wrapper(pipeline)
+    pipeline_profile = config.resolve(pipeline_wrapper)
+    device = pipeline_profile.get_device()                                          # Get all the information about the cam
+    device_product_line = str(device.get_info(rs.camera_info.product_line))         # Convert information of camera in string
     
     def __init__(self, proxy_map, startup_check=False):
         super(SpecificWorker, self).__init__(proxy_map)
@@ -73,44 +73,7 @@ class SpecificWorker(GenericWorker):
         else:
             self.timer.timeout.connect(self.compute)
             self.timer.start(self.Period)
-
-
-        # Check if camera works correctly (It´s RGBD == Correct)
-        found_rgb = False	
-        for s in device.sensors:
-            print ("Device Name:", s.get_info(rs.camera_info.name))
-            if s.get_info(rs.camera_info.name) == 'RGB Camera':
-                found_rgb = True
-                break
-
-        if not found_rgb:
-            print("The demo requires Depth camera with Color sensor")
-
-            # Program finish because there aren´t cameras RGBD available
-            #exit(0)
-
-        # Configure everything about streams (It shows camera information spliting colors and depth)
-        config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
-        config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
-
-        # Preparing record settings
-        if recordFrameModeActive or recordTimeModeActive:
-            print ("It´s gonna be recorded. Check the folder \"/home/robolab/carpetaVideos\"")
-            #config.enable_record_to_file('/home/robolab/carpetaVideos/videoCorto.bag')
-
-        # Start streaming and getting frames
-        pipeline.start(config)
-        
-        # Show the information about how the code will work
-        if recordFrameModeActive:
-            print ("Mode Selected -> Frame Mode")
-            countFrames = 0
-        elif recordTimeModeActive:
-            print ("Mode Selected -> Time Mode")
-            startTime = time.time()
-        else:
-            print ("Mode Selected -> Only View")
-           
+            self.initializeStream()
 
 
     def __del__(self):
@@ -122,6 +85,8 @@ class SpecificWorker(GenericWorker):
         # except:
         #	traceback.print_exc()
         #	print("Error reading config params")
+        self.isStreaming = False
+        
         return True
 
 
@@ -129,93 +94,97 @@ class SpecificWorker(GenericWorker):
     def compute(self):
         #print('SpecificWorker.compute...')
         
-
-        # Execute a loop who get the image and show it
-        try:
-            while True:
-                # Wait for a coherent pair of frames: depth and color (Should be one color frame and depth frame)
-                frames = pipeline.wait_for_frames()
-                depth_frame = frames.get_depth_frame()
-                color_frame = frames.get_color_frame()
-                if not depth_frame or not color_frame:
-                    continue
-
-                # Convert images to numpy arrays
-                depth_image = np.asanyarray(depth_frame.get_data())
-                color_image = np.asanyarray(color_frame.get_data())
-
-                # Apply colormap on depth image (image must be converted to 8-bit per pixel first)
-                depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(
-                    depth_image, alpha=0.03), cv2.COLORMAP_JET)
-
-                depth_colormap_dim = depth_colormap.shape
-                color_colormap_dim = color_image.shape
-
-                # If depth and color resolutions are different, resize color image to match depth image for display
-                if depth_colormap_dim != color_colormap_dim:
-                    resized_color_image = cv2.resize(color_image, dsize=(
-                        depth_colormap_dim[1], depth_colormap_dim[0]), interpolation=cv2.INTER_AREA)
-                    images = np.hstack((resized_color_image, depth_colormap))
-                else:
-                    images = np.hstack((color_image, depth_colormap))
-                    
-                
-                if recordFrameModeActive:
-                    if maxFramesVideo > countFrames:
-                        # Increment the count of frames that are taken
-                        countFrames += 1
-                        #If we are in this mode we are not interested about show what the cam is seing
+        if self.isStreaming:
+            # Execute a loop who get the image and show it
+            try:
+                while True:
+                    # Wait for a coherent pair of frames: depth and color (Should be one color frame and depth frame)
+                    frames = self.pipeline.wait_for_frames()
+                    depth_frame = frames.get_depth_frame()
+                    color_frame = frames.get_color_frame()
+                    if not depth_frame or not color_frame:
                         continue
-                    else:                # If we got max value of frames we have to stop recording
-                        print ("Finished Recording. Recorded", maxFramesVideo, "frames")
-                        break
-                    
-                if recordTimeModeActive:
-                    currentTime = time.time()
-                    if (currentTime - startTime) > maxSecondsVideo:
-                        print ("Finished Recording. Recorded", maxSecondsVideo, "seconds")
-                        break
+
+                    # Convert images to numpy arrays
+                    depth_image = np.asanyarray(depth_frame.get_data())
+                    color_image = np.asanyarray(color_frame.get_data())
+
+                    # Apply colormap on depth image (image must be converted to 8-bit per pixel first)
+                    depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(
+                        depth_image, alpha=0.03), cv2.COLORMAP_JET)
+
+                    depth_colormap_dim = depth_colormap.shape
+                    color_colormap_dim = color_image.shape
+
+                    # If depth and color resolutions are different, resize color image to match depth image for display
+                    if depth_colormap_dim != color_colormap_dim:
+                        resized_color_image = cv2.resize(color_image, dsize=(
+                            depth_colormap_dim[1], depth_colormap_dim[0]), interpolation=cv2.INTER_AREA)
+                        images = np.hstack((resized_color_image, depth_colormap))
                     else:
-                        #If we are in this mode we are not interested about show what the cam is seing
-                        continue
+                        images = np.hstack((color_image, depth_colormap))
+                        
+                    
+                    if self.recordFrameModeActive:
+                        if self.maxFramesVideo > self.countFrames:
+                            # Increment the count of frames that are taken
+                            self.countFrames += 1
+                            #If we are in this mode we are not interested about show what the cam is seing
+                            continue
+                        else:                # If we got max value of frames we have to stop recording
+                            print ("Finished Recording. Recorded", self.maxFramesVideo, "frames")
+                            break
+                        
+                    if self.recordTimeModeActive:
+                        currentTime = time.time()
+                        if (currentTime - self.startTime) > self.maxSecondsVideo:
+                            print ("Finished Recording. Recorded", self.maxSecondsVideo, "seconds")
+                            break
+                        else:
+                            #If we are in this mode we are not interested about show what the cam is seing
+                            continue
 
-                # If we have both modes desactivated (False) then it will show what the camera is seing
-                cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
-                cv2.imshow('RealSense', images)
-                cv2.waitKey(1)
-                
+                    # If we have both modes desactivated (False) then it will show what the camera is seing
+                    cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
+                    cv2.imshow('RealSense', images)
+                    cv2.waitKey(1)
+                    
+                    letraPulsada = cv2.waitKey(1) & 0xFF
+                    
+                    if letraPulsada == 13:
+                        print ("Stopping Streaming")
+                        self.isStreaming = False
+                        
+                    if letraPulsada == 27:
+                        print ("Program Finish")
+                    
+                        #print ("Image Showed")
+            finally:
+                # Stop streaming
                 """
-                if maxFramesVideo > countFrames:
-                    # Increment the count of frames that are taken
-                    countFrames += 1
-                    continue
-
-                # If we got max value of frames we have to stop recording
-                else:
-                    print ("Record Finish")
-                    break
                 
-                
-                cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
-                cv2.imshow('RealSense', images)
-                cv2.waitKey(1)
-
+                if endExecute == 0:
+                    pipeline.stop()
+                    self.timer.stop()
+                    print ("Pipeline stopped")
+                    print ("Numero de seconds grabados ->", (currentTime - startTime))    
+                    endExecute = 1        
+                #exit(0)
+                #sys.exit(0)
                 """
-                #print ("Image Showed")
-        finally:
-            # Stop streaming
-            """
-            if endExecute == 0:
-                pipeline.stop()
-                self.timer.stop()
-                print ("Pipeline stopped")
-                print ("Numero de seconds grabados ->", (currentTime - startTime))    
-                endExecute = 1        
-            #exit(0)
-            #sys.exit(0)
-	    """
-            
-             
+                
+        # In this case the streaming is not activated
+        else:
+            # If the streaming is not available and u wanna activate just press Enter
+            letraPulsada = cv2.waitKey(1) & 0xFF   
+            if letraPulsada == 13:
+                #self.initializeStream ()
+                print ("Initializing streaming")
+                isStreaming = True
+            # If someone want finish the program just press Esc
+            if letraPulsada == 27:
+                print ("Finish program")
+                
         return True
 
     def startup_check(self):
@@ -272,8 +241,65 @@ class SpecificWorker(GenericWorker):
         # write your CODE here
         #
         return ret
+    
+    #
+    # Allow initialize the stream for record or view (We should call this method many times)
+    #
+
+    def initializeStream (self):
+        # Check if camera works correctly (It´s RGBD == Correct)
+        found_rgb = False	
+        for s in self.device.sensors:
+            print ("Device Name:", s.get_info(rs.camera_info.name))
+            if s.get_info(rs.camera_info.name) == 'RGB Camera':
+                found_rgb = True
+                break
+
+        if not found_rgb:
+            print("The demo requires Depth camera with Color sensor")
+
+            # Program finish because there aren´t cameras RGBD available
+            #exit(0)
+
+        self.isStreaming = True
+
+        # Configure everything about streams (It shows camera information spliting colors and depth)
+        self.config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
+        self.config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
+
+        # Preparing record settings
+        if self.recordFrameModeActive or self.recordTimeModeActive:
+            print ("It´s gonna be recorded. Check the folder \"/home/robolab/carpetaVideos\"")
+            #config.enable_record_to_file('/home/robolab/carpetaVideos/videoCorto.bag')
+
+        # Start streaming and getting frames
+        self.pipeline.start(self.config)
+        
+        # Show the information about how the code will work
+        if self.recordFrameModeActive:
+            print ("Mode Selected -> Frame Mode")
+            countFrames = 0
+        elif self.recordTimeModeActive:
+            print ("Mode Selected -> Time Mode")
+            startTime = time.time()
+        else:
+            print ("Mode Selected -> Only View")
+        
+        return
+
+    #
+    # Allows disable streamings for stop requesting frames
+    #
+
+    def stopStream (self):
+        
+        
+        
+        return
+        
     # ===================================================================
     # ===================================================================
+    
 
 
     ######################
